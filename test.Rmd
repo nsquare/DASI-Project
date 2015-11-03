@@ -1,0 +1,191 @@
+Child-Adult Ratio in India based on Rural vs Urban demographic
+========================================================
+
+The research question involves average number of children ( <18 years ) per adult person in family in Rural and Urban India. The current population in India stands close to 1.25 billion today , 2nd largest in world, next to china. With this huge population the biggest challenge infront of Indian government is to create employment opportunities, healthcare facilities , educational facilities and other amenities. It is a known figure that the majority of population in India lives in rural areas with poor infrastrcture. The research question has been chosen to throw light on family preferance of rural vs Urban areas keen on having more number of children , even beside the fact that family planning and population control programs were started by the government 3 decades back in all the demographic regions of India. It is imperative to align the volume of such programmes in areas which tend to have higher ratio as well as provide more learning opportunities to these little citizens for the future prospect.
+
+ **Note** : It is important to note that the family structure in India varies greatly from nuclear structure ( Parents+ children ) to Joint structure ( i.e Grand parents with one or more of their children who are parents as well and all living together with their offsprings). To normalize this we are taking the ratio of children to the adult in the family.
+ 
+## Data collection 
+
+The data has been downloaded from [University of Michigan website](http://www.icpsr.umich.edu/icpsrweb/DSDR/studies/22626) DS2 Household data. The Data were collected in every state of India with the exception of Andaman and Nicobar Islands. 
+
+Quoting the summary of the data collection from the website :
+>The India Human Development Survey 2005 (IHDS) is a nationally representative, multi-topic survey of 41,554 households in 1,503 villages and 971 urban neighborhoods across India. Two one-hour interviews in each household covered topics concerning health, education, employment, economic status, marriage, fertility, gender relations, and social capital. Children aged 8-11 completed short reading, writing and arithmetic tests. Additional village, school, and medical facility interviews are also available."
+
+In this Observational study , Each of the observation has been given unique CASEID and there are 41554 observation with 945 variables ( code list attached ). For this Research question we selected 12 variables and added 3 variables ( "Ratio" , "children" , "Fam_size" ) based upon the data.
+The Primary variables used for the study are "Ratio" , "Urban". 
+Since the households were picked randomly each stratum spread across the country ,The results can be generalized for the entire population in India.
+
+
+#### Variables:
+Column    |  Meaning
+--------- | -------------------------------------
+CASEID    | : Unique household identification id
+STATEID   | : Represents state of the case
+URBAN     | : Whether the case falls in Urban (1) area or Rural (1) area
+NPERSONS  | : Number of persons in the household
+NCHILD    | : Number of children (<12) in the household
+NTEENS    | : Number of teens (<18) in the household
+NADULT    | : Number of Adults in the household
+NMARRIEDF | : Number of married females in the household
+NMARRIEDM | : Number of married males in the household
+ID14      | : Religion of the household (Hindu, Muslim, Christian, Sikh, Buddhist, Jain, and Tribal), plus a residual “Other”)
+***
+#### _Constructed Variables:_
+
+Column    |Meaning
+----------|------------------------------------------------------------
+RATIO     | : CHILDREN/NADULT ( Ratio of children : Adults at home )
+CHILDREN  | : NCHILD+NTEENS ( Sum of children and teens in the household)
+SIZE      | : Small for <= 4 NPERSONS(S) , Medium (M) between (4,8 (including 8)) NPERSONS , Large (L) > 8 NPERSONS
+
+
+###### DATA PREPROCESSING:
+
+```{r }
+load('22626-0002-Data.rda') #Loads the data
+col_list = c("CASEID","STATEID","URBAN","NPERSONS","NCHILD","NTEEN","NADULTS","NMARRIEDF","NMARRIEDM","ID14")
+stat_data = da22626.0002[col_list] #Subsets the required columns of the data
+stat_data = subset(stat_data,stat_data$NADULTS > 0 )
+children = stat_data$NCHILD + stat_data$NTEEN 
+
+ratio = children/stat_data$NADULTS
+
+size = with(stat_data, ifelse(NPERSONS <= 4 , "S",
+                             ifelse(NPERSONS <= 8 & NPERSONS >4, "M",
+                             ifelse(NPERSONS > 8 , "L", "other"))))
+
+#Adding constructed variables to the dataset
+
+stat_data$size = size
+stat_data$ratio = ratio
+stat_data$children = children
+
+stat_data = subset(stat_data,stat_data$children > 0 )
+
+
+```
+
+Summary of the data :
+
+```{r}
+summary(stat_data)
+```
+
+Below is the histogram of the column "Ratio".
+
+```{r fig.width=12, fig.height=8}
+
+hist(stat_data$ratio, breaks = 100 , main = "Histogram: Child-Adult ratio of family in India" , xlab ="Child-Adult ratio"  )
+
+```
+We can see above that the histogram is highly right skewed.
+
+#### splitting the data set based on "URBAN" column
+
+```{r}
+
+stat_data_rural = subset(stat_data , stat_data$URBAN == '(0) Rural')
+
+
+stat_data_urban = subset(stat_data , stat_data$URBAN == '(1) Urban')
+
+```
+
+
+```{r fig.width=12, fig.height=8}
+
+hist(stat_data_rural$ratio, breaks = 100 , main = "Histogram: Child-Adult ratio of family in Rural Area" , xlab ="Child-Adult ratio" , xlim =c(0,8) )
+summary(stat_data_rural$ratio)
+
+S_Rural = sd(stat_data_rural$ratio)
+Xbar_Rural =mean(stat_data_rural$ratio)
+n_Rural = nrow(stat_data_rural)
+```
+
+Standard Deviation for child-Adult ratio of a family in Rural areas : $S_{Rural}$ = `r sd(stat_data_rural$ratio)`
+
+sample mean for child-Adult ratio of a family in Rural areas : $\bar{x}_{Rural}$ = `r mean(stat_data_rural$ratio)`
+
+Number of samples taken for Rural areas : $n_{Rural}$ = `r nrow(stat_data_rural)`
+
+```{r fig.width=12, fig.height=8}
+hist(stat_data_urban$ratio, breaks = 100 , main = "Histogram: Child-Adult ratio of family in Urban Area" , xlab ="Child-Adult ratio" ,xlim = c(0,8) )
+summary(stat_data_urban$ratio)
+
+S_Urban =sd(stat_data_urban$ratio)
+Xbar_Urban =mean(stat_data_urban$ratio)
+n_Urban =nrow(stat_data_urban)
+```
+
+Standard Deviation for child-Adult ratio of a family in Urban areas : $S_{Urban}$ = `r sd(stat_data_urban$ratio)`
+
+sample mean for child-Adult ratio of a family in Urban areas : $\bar{x}_Urban$ = `r mean(stat_data_urban$ratio)`
+
+Number of samples taken for Urban areas : $n_{Urban}$ = `r nrow(stat_data_urban)`
+
+
+.           | $\bar{x}$     |    S       |    n
+------------|---------------|------------|------------
+Rural       |`r Xbar_Rural` |`r S_Rural` |`r n_Rural`
+Urban       |`r Xbar_Urban` |`r S_Urban` | `r n_Urban`
+
+The sample means suggest that for the given sample the child-Adult ratio of a family in Rural areas is greater than the child-Adult ratio of a family in Urban area.
+
+Let us examine if we can extend this result for the entire population or not.
+
+Before we begin our calculation , it would be noteworthy to check the conditions for evaluating the test statistics. 
+The population was randomly selected in each area hence it can be considered independent of each other. Also the sample size in each data set is much less than the 10% of the entire population of the country which ranges in millions and even though the dataset is highly skewed our sample size is much greater than 30 so now we can safely proceed towards calculating test statistics.
+
+
+```{r}
+PE =  Xbar_Rural - Xbar_Urban  #Point Estimate
+SE = sqrt((((S_Rural)^2)/n_Rural ) + (((S_Urban)^2)/n_Urban )) #Standard Error
+CV = -qnorm((1-0.95)/2) #Critical value
+
+UB = PE +SE*CV #Upper Bound
+LB = PE -SE*CV #Lower Bound
+```
+
+Since we are comparing the two means , our point estimate is $\bar{x}_Rural$ - $\bar{x}_Urban$ ,
+Standard Error is `r SE `
+
+95% Confidence Interval for the average difference in **population mean** of Urban and Rural area is (`r LB`, `r UB`)
+
+#### Hypothesis Testing and Evaluation
+
+Null Hypothesis      : $H_{0}$ : $U_{Rural}$ - $U_{urban}$ = 0 i.e There is no difference in average child-Adult ratio in a family from Rural area vs Urban Area generalized for the entire Indian population.
+
+Alternate Hypothesis : $H_{A}$ : $U_{Rural}$ - $U_{urban}$ not > 0
+i.e The mean of the child-adult ratio in a family from Rural area is greater than that of Urban area generalized for the entire Indian population.
+
+Since we are comparing the **Population mean** of child-adult ratio for Rural vs Urban area and checking if that of Rural area is greater than the Urban Area, we will be calculating the one-sided P value.
+
+
+```{r}
+
+Z = (PE - 0)/SE #Z Score
+Pval = pnorm(-abs(Z)) # Pvalue : One sided
+```
+
+Our Z score is `r Z` , which is very large, 
+and our one sided P value is `r Pval ` which is much smaller than threashold value $\alpha$ = 0.05 .Hence we can safely reject the null Hypothesis and adopt our Alternate Hypothesis i.e The Child-Adult ratio trend for Rural and Urban areas in India are different from each other this ratio is Higher in Rural India i.e Families in Rural India still tends to have more number of children as compared to the Urban India. 
+Also it should be noted that our Null Hypothesis mean does not lie within the confidence Interval, so our result agrees with our earlier findings.
+
+There are number of factors for this high child-Adult ratio in Rural areas such as Illiteracy , poverty which forces people to overlook birth control measures , Ignorance towards healthcare etc.Hence the government should focus more on birth control measures in Rural areas as well as provide more facilities from neonatal care to education in Villages so as to prepare the children for the future.
+
+##### CITATION
+The data was collected from ICPSR and 
+[University of Michigan website](http://www.icpsr.umich.edu/icpsrweb/DSDR/studies/22626) DS2 Household data
+
+##### APPENDIX
+
+
+
+```{r}
+
+head(stat_data, 30)
+```
+
+
+
