@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>Child-Adult Ratio in India based on Rural vs Urban demographic</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+</head>
+
+<body>
+<h1>Child-Adult Ratio in India based on Rural vs Urban demographic</h1>
+
+<p>The research question involves average number of children ( &lt;18 years ) per adult person in family in Rural and Urban India. The current population in India stands close to 1.25 billion today , 2nd largest in world, next to china. With this huge population the biggest challenge infront of Indian government is to create employment opportunities, healthcare facilities , educational facilities and other amenities. It is a known figure that the majority of population in India lives in rural areas with poor infrastrcture. The research question has been chosen to throw light on family preferance of rural vs Urban areas keen on having more number of children , even beside the fact that family planning and population control programs were started by the government 3 decades back in all the demographic regions of India. It is imperative to align the volume of such programmes in areas which tend to have higher ratio as well as provide more learning opportunities to these little citizens for the future prospect.</p>
+
+<p><strong>Note</strong> : It is important to note that the family structure in India varies greatly from nuclear structure ( Parents+ children ) to Joint structure ( i.e Grand parents with one or more of their children who are parents as well and all living together with their offsprings). To normalize this we are taking the ratio of children to the adult in the family.</p>
+
+<h2>Data collection</h2>
+
+<p>The data has been downloaded from <a href="http://www.icpsr.umich.edu/icpsrweb/DSDR/studies/22626">University of Michigan website</a> DS2 Household data. The Data were collected in every state of India with the exception of Andaman and Nicobar Islands. </p>
+
+<p>Quoting the summary of the data collection from the website :</p>
+
+<blockquote>
+<p>The India Human Development Survey 2005 (IHDS) is a nationally representative, multi-topic survey of 41,554 households in 1,503 villages and 971 urban neighborhoods across India. Two one-hour interviews in each household covered topics concerning health, education, employment, economic status, marriage, fertility, gender relations, and social capital. Children aged 8-11 completed short reading, writing and arithmetic tests. Additional village, school, and medical facility interviews are also available.&ldquo;</p>
+</blockquote>
+
+<p>In this Observational study , Each of the observation has been given unique CASEID and there are 41554 observation with 945 variables ( code list attached ). For this Research question we selected 12 variables and added 3 variables ( &quot;Ratio&rdquo; , &ldquo;children&rdquo; , &ldquo;Fam_size&rdquo; ) based upon the data.
+The Primary variables used for the study are &ldquo;Ratio&rdquo; , &ldquo;Urban&rdquo;. 
+Since the households were picked randomly each stratum spread across the country ,The results can be generalized for the entire population in India.</p>
+
+<h4>Variables:</h4>
+
+<table><thead>
+<tr>
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>CASEID</td>
+<td>: Unique household identification id</td>
+</tr>
+<tr>
+<td>STATEID</td>
+<td>: Represents state of the case</td>
+</tr>
+<tr>
+<td>URBAN</td>
+<td>: Whether the case falls in Urban (1) area or Rural (1) area</td>
+</tr>
+<tr>
+<td>NPERSONS</td>
+<td>: Number of persons in the household</td>
+</tr>
+<tr>
+<td>NCHILD</td>
+<td>: Number of children (&lt;12) in the household</td>
+</tr>
+<tr>
+<td>NTEENS</td>
+<td>: Number of teens (&lt;18) in the household</td>
+</tr>
+<tr>
+<td>NADULT</td>
+<td>: Number of Adults in the household</td>
+</tr>
+<tr>
+<td>NMARRIEDF</td>
+<td>: Number of married females in the household</td>
+</tr>
+<tr>
+<td>NMARRIEDM</td>
+<td>: Number of married males in the household</td>
+</tr>
+<tr>
+<td>ID14</td>
+<td>: Religion of the household (Hindu, Muslim, Christian, Sikh, Buddhist, Jain, and Tribal), plus a residual “Other”)</td>
+</tr>
+</tbody></table>
+
+<hr/>
+
+<h4><em>Constructed Variables:</em></h4>
+
+<table><thead>
+<tr>
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>RATIO</td>
+<td>: CHILDREN/NADULT ( Ratio of children : Adults at home )</td>
+</tr>
+<tr>
+<td>CHILDREN</td>
+<td>: NCHILD+NTEENS ( Sum of children and teens in the household)</td>
+</tr>
+<tr>
+<td>SIZE</td>
+<td>: Small for &lt;= 4 NPERSONS(S) , Medium (M) between (4,8 (including 8)) NPERSONS , Large (L) &gt; 8 NPERSONS</td>
+</tr>
+</tbody></table>
+
+<h6>DATA PREPROCESSING:</h6>
+
+<pre><code class="r">load(&#39;22626-0002-Data.rda&#39;) #Loads the data
+col_list = c(&quot;CASEID&quot;,&quot;STATEID&quot;,&quot;URBAN&quot;,&quot;NPERSONS&quot;,&quot;NCHILD&quot;,&quot;NTEEN&quot;,&quot;NADULTS&quot;,&quot;NMARRIEDF&quot;,&quot;NMARRIEDM&quot;,&quot;ID14&quot;)
+stat_data = da22626.0002[col_list] #Subsets the required columns of the data
+stat_data = subset(stat_data,stat_data$NADULTS &gt; 0 )
+children = stat_data$NCHILD + stat_data$NTEEN 
+
+ratio = children/stat_data$NADULTS
+
+size = with(stat_data, ifelse(NPERSONS &lt;= 4 , &quot;S&quot;,
+                             ifelse(NPERSONS &lt;= 8 &amp; NPERSONS &gt;4, &quot;M&quot;,
+                             ifelse(NPERSONS &gt; 8 , &quot;L&quot;, &quot;other&quot;))))
+
+#Adding constructed variables to the dataset
+
+stat_data$size = size
+stat_data$ratio = ratio
+stat_data$children = children
+
+stat_data = subset(stat_data,stat_data$children &gt; 0 )
+</code></pre>
+
+<p>Summary of the data :</p>
+
+<pre><code class="r">summary(stat_data)
+</code></pre>
+
+<pre><code>##        CASEID                     STATEID            URBAN      
+##  100201011:    1   (29) Karnataka     : 3362   (0) Rural:23044  
+##  100201021:    1   (09) Uttar Pradesh : 3203   (1) Urban:12532  
+##  100201031:    1   (27) Maharashtra   : 2764                    
+##  100201041:    1   (23) Madhya Pradesh: 2451                    
+##  100201051:    1   (08) Rajasthan     : 2198                    
+##  100201061:    1   (28) Andhra Pradesh: 2014                    
+##  (Other)  :35570   (Other)            :19584                    
+##     NPERSONS          NCHILD           NTEEN           NADULTS      
+##  Min.   : 2.000   Min.   : 0.000   Min.   :0.0000   Min.   : 1.000  
+##  1st Qu.: 4.000   1st Qu.: 1.000   1st Qu.:0.0000   1st Qu.: 2.000  
+##  Median : 5.000   Median : 2.000   Median :1.0000   Median : 2.000  
+##  Mean   : 5.627   Mean   : 1.923   Mean   :0.8667   Mean   : 2.837  
+##  3rd Qu.: 7.000   3rd Qu.: 3.000   3rd Qu.:1.0000   3rd Qu.: 3.000  
+##  Max.   :38.000   Max.   :17.000   Max.   :8.0000   Max.   :18.000  
+##                                                                     
+##    NMARRIEDF       NMARRIEDM                ID14           size          
+##  Min.   :0.000   Min.   :0.000   (1) Hindu    :28527   Length:35576      
+##  1st Qu.:1.000   1st Qu.:1.000   (2) Muslim   : 4354   Class :character  
+##  Median :1.000   Median :1.000   (3) Christian: 1067   Mode  :character  
+##  Mean   :1.281   Mean   :1.235   (4) Sikh     :  881                     
+##  3rd Qu.:2.000   3rd Qu.:1.000   (7) Tribal   :  374                     
+##  Max.   :8.000   Max.   :8.000   (5) Buddhist :  239                     
+##                                  (Other)      :  134                     
+##      ratio           children     
+##  Min.   : 0.100   Min.   : 1.000  
+##  1st Qu.: 0.500   1st Qu.: 2.000  
+##  Median : 1.000   Median : 2.000  
+##  Mean   : 1.145   Mean   : 2.789  
+##  3rd Qu.: 1.500   3rd Qu.: 4.000  
+##  Max.   :12.000   Max.   :25.000  
+## 
+</code></pre>
+
+<p>Below is the histogram of the column &ldquo;Ratio&rdquo;.</p>
+
+<pre><code class="r">hist(stat_data$ratio, breaks = 100 , main = &quot;Histogram: Child-Adult ratio of family in India&quot; , xlab =&quot;Child-Adult ratio&quot;  )
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-3"/> 
+We can see above that the histogram is highly right skewed.</p>
+
+<h4>splitting the data set based on &ldquo;URBAN&rdquo; column</h4>
+
+<pre><code class="r">stat_data_rural = subset(stat_data , stat_data$URBAN == &#39;(0) Rural&#39;)
+
+
+stat_data_urban = subset(stat_data , stat_data$URBAN == &#39;(1) Urban&#39;)
+</code></pre>
+
+<pre><code class="r">hist(stat_data_rural$ratio, breaks = 100 , main = &quot;Histogram: Child-Adult ratio of family in Rural Area&quot; , xlab =&quot;Child-Adult ratio&quot; , xlim =c(0,8) )
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-5"/> </p>
+
+<pre><code class="r">summary(stat_data_rural$ratio)
+</code></pre>
+
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.1000  0.6667  1.0000  1.1860  1.5000  8.0000
+</code></pre>
+
+<pre><code class="r">S_Rural = sd(stat_data_rural$ratio)
+Xbar_Rural =mean(stat_data_rural$ratio)
+n_Rural = nrow(stat_data_rural)
+</code></pre>
+
+<p>Standard Deviation for child-Adult ratio of a family in Rural areas : \( S_{Rural} \) = 0.7767984</p>
+
+<p>sample mean for child-Adult ratio of a family in Rural areas : \( \bar{x}_{Rural} \) = 1.1863076</p>
+
+<p>Number of samples taken for Rural areas : \( n_{Rural} \) = 23044</p>
+
+<pre><code class="r">hist(stat_data_urban$ratio, breaks = 100 , main = &quot;Histogram: Child-Adult ratio of family in Urban Area&quot; , xlab =&quot;Child-Adult ratio&quot; ,xlim = c(0,8) )
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk unnamed-chunk-6"/> </p>
+
+<pre><code class="r">summary(stat_data_urban$ratio)
+</code></pre>
+
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.1111  0.5000  1.0000  1.0680  1.5000 12.0000
+</code></pre>
+
+<pre><code class="r">S_Urban =sd(stat_data_urban$ratio)
+Xbar_Urban =mean(stat_data_urban$ratio)
+n_Urban =nrow(stat_data_urban)
+</code></pre>
+
+<p>Standard Deviation for child-Adult ratio of a family in Urban areas : \( S_{Urban} \) = 0.7269855</p>
+
+<p>sample mean for child-Adult ratio of a family in Urban areas : \( \bar{x}_Urban \) = 1.0684222</p>
+
+<p>Number of samples taken for Urban areas : \( n_{Urban} \) = 12532</p>
+
+<table><thead>
+<tr>
+<th>.</th>
+<th>\( \bar{x} \)</th>
+<th>S</th>
+<th>n</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Rural</td>
+<td>1.1863076</td>
+<td>0.7767984</td>
+<td>23044</td>
+</tr>
+<tr>
+<td>Urban</td>
+<td>1.0684222</td>
+<td>0.7269855</td>
+<td>12532</td>
+</tr>
+</tbody></table>
+
+<p>The sample means suggest that for the given sample the child-Adult ratio of a family in Rural areas is greater than the child-Adult ratio of a family in Urban area.</p>
+
+<p>Let us examine if we can extend this result for the entire population or not.</p>
+
+<p>Before we begin our calculation , it would be noteworthy to check the conditions for evaluating the test statistics. 
+The population was randomly selected in each area hence it can be considered independent of each other. Also the sample size in each data set is much less than the 10% of the entire population of the country which ranges in millions and even though the dataset is highly skewed our sample size is much greater than 30 so now we can safely proceed towards calculating test statistics.</p>
+
+<pre><code class="r">PE =  Xbar_Rural - Xbar_Urban  #Point Estimate
+SE = sqrt((((S_Rural)^2)/n_Rural ) + (((S_Urban)^2)/n_Urban )) #Standard Error
+CV = -qnorm((1-0.95)/2) #Critical value
+
+UB = PE +SE*CV #Upper Bound
+LB = PE -SE*CV #Lower Bound
+</code></pre>
+
+<p>Since we are comparing the two means , our point estimate is \( \bar{x}_Rural \) - \( \bar{x}_Urban \) ,
+Standard Error is 0.0082679</p>
+
+<p>95% Confidence Interval for the average difference in <strong>population mean</strong> of Urban and Rural area is (0.1016806, 0.1340901)</p>
+
+<h4>Hypothesis Testing and Evaluation</h4>
+
+<p>Null Hypothesis      : \( H_{0} \) : \( U_{Rural} \) - \( U_{urban} \) = 0 i.e There is no difference in average child-Adult ratio in a family from Rural area vs Urban Area generalized for the entire Indian population.</p>
+
+<p>Alternate Hypothesis : \( H_{A} \) : \( U_{Rural} \) - \( U_{urban} \) not &gt; 0
+i.e The mean of the child-adult ratio in a family from Rural area is greater than that of Urban area generalized for the entire Indian population.</p>
+
+<p>Since we are comparing the <strong>Population mean</strong> of child-adult ratio for Rural vs Urban area and checking if that of Rural area is greater than the Urban Area, we will be calculating the one-sided P value.</p>
+
+<pre><code class="r">Z = (PE - 0)/SE #Z Score
+Pval = pnorm(-abs(Z)) # Pvalue : One sided
+</code></pre>
+
+<p>Our Z score is 14.2582095 , which is very large, 
+and our one sided P value is 1.992748 &times; 10<sup>-46</sup> which is much smaller than threashold value \( \alpha \) = 0.05 .Hence we can safely reject the null Hypothesis and adopt our Alternate Hypothesis i.e The Child-Adult ratio trend for Rural and Urban areas in India are different from each other this ratio is Higher in Rural India i.e Families in Rural India still tends to have more number of children as compared to the Urban India. 
+Also it should be noted that our Null Hypothesis mean does not lie within the confidence Interval, so our result agrees with our earlier findings.</p>
+
+<p>There are number of factors for this high child-Adult ratio in Rural areas such as Illiteracy , poverty which forces people to overlook birth control measures , Ignorance towards healthcare etc.Hence the government should focus more on birth control measures in Rural areas as well as provide more facilities from neonatal care to education in Villages so as to prepare the children for the future.</p>
+
+<h5>CITATION</h5>
+
+<p>The data was collected from ICPSR and 
+<a href="http://www.icpsr.umich.edu/icpsrweb/DSDR/studies/22626">University of Michigan website</a> DS2 Household data</p>
+
+<h5>APPENDIX</h5>
+
+<pre><code class="r">head(stat_data, 30)
+</code></pre>
+
+<pre><code>##       CASEID              STATEID     URBAN NPERSONS NCHILD NTEEN NADULTS
+## 1   10201010 (01) Jammu &amp; Kashmir (0) Rural        6      2     1       3
+## 2   10201020 (01) Jammu &amp; Kashmir (0) Rural       15      6     1       8
+## 3   10201030 (01) Jammu &amp; Kashmir (0) Rural        7      4     1       2
+## 4   10201040 (01) Jammu &amp; Kashmir (0) Rural        5      3     0       2
+## 5   10201050 (01) Jammu &amp; Kashmir (0) Rural       10      3     2       5
+## 6   10201060 (01) Jammu &amp; Kashmir (0) Rural       15      7     1       7
+## 7   10201070 (01) Jammu &amp; Kashmir (0) Rural        9      4     3       2
+## 8   10201080 (01) Jammu &amp; Kashmir (0) Rural        6      4     0       2
+## 9   10201090 (01) Jammu &amp; Kashmir (0) Rural        9      6     1       2
+## 10  10201100 (01) Jammu &amp; Kashmir (0) Rural       12      3     3       6
+## 11  10201110 (01) Jammu &amp; Kashmir (0) Rural        5      3     0       2
+## 12  10201120 (01) Jammu &amp; Kashmir (0) Rural        4      2     0       2
+## 13  10201130 (01) Jammu &amp; Kashmir (0) Rural        7      3     2       2
+## 14  10201140 (01) Jammu &amp; Kashmir (0) Rural        7      5     0       2
+## 15  10201150 (01) Jammu &amp; Kashmir (0) Rural       10      6     2       2
+## 16  10201160 (01) Jammu &amp; Kashmir (0) Rural        8      3     0       5
+## 17  10201170 (01) Jammu &amp; Kashmir (0) Rural        5      2     2       1
+## 18  10201180 (01) Jammu &amp; Kashmir (0) Rural       11      3     2       6
+## 19  10201190 (01) Jammu &amp; Kashmir (0) Rural        6      4     0       2
+## 20  10201200 (01) Jammu &amp; Kashmir (0) Rural        8      4     0       4
+## 21  10202010 (01) Jammu &amp; Kashmir (0) Rural        5      2     1       2
+## 22  10202020 (01) Jammu &amp; Kashmir (0) Rural        8      2     3       3
+## 23  10202030 (01) Jammu &amp; Kashmir (0) Rural        6      3     0       3
+## 24  10202040 (01) Jammu &amp; Kashmir (0) Rural        5      2     1       2
+## 25  10202050 (01) Jammu &amp; Kashmir (0) Rural        9      4     1       4
+## 26  10202060 (01) Jammu &amp; Kashmir (0) Rural       10      3     3       4
+## 27  10202070 (01) Jammu &amp; Kashmir (0) Rural        6      1     0       5
+## 28  10202080 (01) Jammu &amp; Kashmir (0) Rural        6      1     1       4
+## 30  10202100 (01) Jammu &amp; Kashmir (0) Rural        3      1     0       2
+## 31  10202110 (01) Jammu &amp; Kashmir (0) Rural        8      6     0       2
+##    NMARRIEDF NMARRIEDM       ID14 size     ratio children
+## 1          1         1 (2) Muslim    M 1.0000000        3
+## 2          4         4 (2) Muslim    L 0.8750000        7
+## 3          1         1 (2) Muslim    M 2.5000000        5
+## 4          1         1 (2) Muslim    M 1.5000000        3
+## 5          1         1 (2) Muslim    L 1.0000000        5
+## 6          2         2 (2) Muslim    L 1.1428571        8
+## 7          1         1 (2) Muslim    L 3.5000000        7
+## 8          1         1 (2) Muslim    M 2.0000000        4
+## 9          1         1 (2) Muslim    L 3.5000000        7
+## 10         0         0 (2) Muslim    L 1.0000000        6
+## 11         1         1 (2) Muslim    M 1.5000000        3
+## 12         1         1 (2) Muslim    S 1.0000000        2
+## 13         1         1 (2) Muslim    M 2.5000000        5
+## 14         1         1 (2) Muslim    M 2.5000000        5
+## 15         1         1 (2) Muslim    L 4.0000000        8
+## 16         2         2 (2) Muslim    M 0.6000000        3
+## 17         0         0 (2) Muslim    M 4.0000000        4
+## 18         2         2 (2) Muslim    L 0.8333333        5
+## 19         1         1 (2) Muslim    M 2.0000000        4
+## 20         2         2 (2) Muslim    M 1.0000000        4
+## 21         1         1 (2) Muslim    M 1.5000000        3
+## 22         1         1 (2) Muslim    M 1.6666667        5
+## 23         1         1 (2) Muslim    M 1.0000000        3
+## 24         1         1 (2) Muslim    M 1.5000000        3
+## 25         2         2 (2) Muslim    L 1.2500000        5
+## 26         2         2 (2) Muslim    L 1.5000000        6
+## 27         2         2 (2) Muslim    M 0.2000000        1
+## 28         1         1 (2) Muslim    M 0.5000000        2
+## 30         1         1 (2) Muslim    S 0.5000000        1
+## 31         1         1 (2) Muslim    M 3.0000000        6
+</code></pre>
+
+</body>
+
+</html>
+
